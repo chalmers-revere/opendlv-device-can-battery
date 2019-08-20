@@ -35,13 +35,11 @@ BS_:
 
 BU_: Chalmers BatteryGateWay
 
-BO_ 645 StateOfCharge: 4 BatteryGateWay
+BO_ 645 Mastershunt: 8 BatteryGateWay
  SG_ Charge : 0|16@1+ (1,0) [0|100] "Percent" Vector__XXX
-
-BO_ 646 Charge: 8 BatteryGateWay
- SG_ Charge1 : 0|8@1+ (1,0) [0|255] "V" Vector__XXX
- SG_ Charge2 : 8|8@1+ (1,0) [0|255] "V" Vector__XXX
- SG_ Current : 16|32@1+ (0.01,0) [-32|32] "A" Vector__XXX
+ SG_ Charge1 : 16|8@1+ (1,0) [0|255] "V" Vector__XXX
+ SG_ Charge2 : 24|8@1+ (1,0) [0|255] "V" Vector__XXX
+ SG_ Current : 32|32@1+ (0.01,0) [-32|32] "A" Vector__XXX
 
 
 CM_ SG_ 645 StateOfCharge "65024 - 65279 Error ; 65280 - 65535 Not available";

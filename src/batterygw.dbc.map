@@ -1,5 +1,5 @@
-batterygw_state_of_charge_t.charge:opendlv.proxy.Battery.state_of_charge
-batterygw_charge_t.charge1:opendlv.proxy.Battery.charge
-batterygw_charge_t.charge2:opendlv.proxy.Battery.charge
-batterygw_charge_t.current:opendlv.proxy.Battery.current
+batterygw_mastershunt_t.charge:opendlv.proxy.Battery.state_of_charge
+batterygw_mastershunt_t.charge1:opendlv.proxy.Battery.charge
+batterygw_mastershunt_t.charge2:opendlv.proxy.Battery.charge
+batterygw_mastershunt_t.current:opendlv.proxy.Battery.current
 

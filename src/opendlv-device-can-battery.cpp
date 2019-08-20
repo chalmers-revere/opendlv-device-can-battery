@@ -61,26 +61,14 @@ int32_t main(int32_t argc, char **argv) {
         opendlv::proxy::Battery msg;
         auto decode = [&od4, VERBOSE, ID, &msg](cluon::data::TimeStamp ts, uint16_t canFrameID, uint8_t *src, uint8_t len) {
             if ( (nullptr == src) || (0 == len) ) return;
-            if (BATTERYGW_STATE_OF_CHARGE_FRAME_ID == canFrameID) {
-                batterygw_state_of_charge_t tmp;
-                if (0 == batterygw_state_of_charge_unpack(&tmp, src, len)) {
-                    msg.state_of_charge(static_cast<uint16_t>(batterygw_state_of_charge_charge_decode(tmp.charge)));
-                    if (VERBOSE) {
-                        std::stringstream sstr;
-                        msg.accept([](uint32_t, const std::string &, const std::string &) {},
-                                   [&sstr](uint32_t, std::string &&, std::string &&n, auto v) { sstr << n << " = " << v << '\n'; },
-                                   []() {});
-                        std::cout << sstr.str() << std::endl;
-                    }
+            if (BATTERYGW_MASTERSHUNT_FRAME_ID == canFrameID) {
+                batterygw_mastershunt_t tmp;
+                if (0 == batterygw_mastershunt_unpack(&tmp, src, len)) {
+                    opendlv::proxy::Battery msg;
+                    msg.state_of_charge(batterygw_mastershunt_charge_decode(tmp.charge));
 
-                    od4.send(msg, ts, ID);
-                }
-            }
-            else if (BATTERYGW_CHARGE_FRAME_ID == canFrameID) {
-                batterygw_charge_t tmp;
-                if (0 == batterygw_charge_unpack(&tmp, src, len)) {
-                    uint16_t v1{static_cast<uint16_t>(batterygw_charge_charge1_decode(tmp.charge1))};
-                    uint16_t v2{static_cast<uint16_t>(batterygw_charge_charge2_decode(tmp.charge2))};
+                    uint16_t v1{static_cast<uint16_t>(batterygw_mastershunt_charge1_decode(tmp.charge1))};
+                    uint16_t v2{static_cast<uint16_t>(batterygw_mastershunt_charge2_decode(tmp.charge2))};
                     msg.charge((v2*256 + v1)/100.0f);
 
                     union Current {
